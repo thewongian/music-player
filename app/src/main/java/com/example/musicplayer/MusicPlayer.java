@@ -2,7 +2,7 @@ package com.example.musicplayer;
 
 import android.media.MediaPlayer;
 
-public class MusicPlayer implements MediaPlayer.OnCompletionListener {\
+public class MusicPlayer implements MediaPlayer.OnCompletionListener {
 
     MediaPlayer player;
     int currentPosition = 0;
@@ -18,22 +18,20 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {\
 
     static final String[] MUSICNAME = new String[]{
             "Super Mario Brothers",
-            "Tetris"
+            "Tetris",
+            "Lets Go Hokies"
     };
 
     public MusicPlayer(MusicService service) {
-
         this.musicService = service;
     }
 
 
     public int getMusicStatus() {
-
         return musicStatus;
     }
 
     public String getMusicName() {
-
         return MUSICNAME[musicIndex];
     }
 
@@ -59,6 +57,20 @@ public class MusicPlayer implements MediaPlayer.OnCompletionListener {\
             player.start();
             musicStatus=1;
         }
+    }
+
+    public void nextSong() {
+        if (musicIndex == 2) musicIndex = 0;
+        else musicIndex++;
+        player.pause();
+        playMusic();
+    }
+
+    public void prevSong() {
+        if (musicIndex == 0) musicIndex = 2;
+        else musicIndex--;
+        player.pause();
+        playMusic();
     }
 
     @Override
